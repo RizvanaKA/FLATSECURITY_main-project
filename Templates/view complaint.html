@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duty Logs | Security Management</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #10b981;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* No page scroll */
+        }
+
+        .container {
+            width: 96%;
+            max-width: 1100px;
+            height: 80vh; /* Fits standard screen */
+            background: var(--card);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        /* Header */
+        .page-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h1 { font-size: 1.3rem; color: var(--text-dark); }
+
+        /* Table Content */
+        .table-area {
+            flex: 1;
+            overflow-y: auto; /* Internal scroll only */
+            padding: 10px 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-dark);
+        }
+
+        /* Status Pills */
+        .badge {
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .on-duty { background: #dcfce7; color: #166534; }
+        .off-duty { background: #fee2e2; color: #991b1b; }
+
+        /* Hyperlink */
+        .log-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .log-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .page-footer {
+            padding: 15px 30px;
+            border-top: 1px solid var(--border);
+            background: #fafafa;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>🕒 Security Staff Duty Logs</h1>
+        <div style="color: var(--text-light); font-size: 0.85rem;">
+            Date: <b>22 Jan 2026</b>
+        </div>
+    </div>
+
+    <div class="table-area">
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Staff Name</th>
+                    <th>Shift Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td>22-01-2026</td>
+                    <td><b>John Wick</b></td>
+                    <td>08:00 AM - 04:00 PM</td>
+                    <td><span class="badge on-duty">On Duty</span></td>
+                    <td><a href="#" class="log-link">View Full Logs</a></td>
+                </tr>
+                <tr>
+                    <td>02</td>
+                    <td>22-01-2026</td>
+                    <td><b>Marcus Aurelius</b></td>
+                    <td>08:00 AM - 04:00 PM</td>
+                    <td><span class="badge on-duty">On Duty</span></td>
+                    <td><a href="#" class="log-link">View Full Logs</a></td>
+                </tr>
+                <tr>
+                    <td>03</td>
+                    <td>21-01-2026</td>
+                    <td><b>Leonidas King</b></td>
+                    <td>04:00 PM - 12:00 AM</td>
+                    <td><span class="badge off-duty">Shift Ended</span></td>
+                    <td><a href="#" class="log-link">View Full Logs</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-footer">
+        <span>System Status: Online</span>
+        <span>Generated by Admin Portal</span>
+    </div>
+</div>
+
+</body>
+</html>

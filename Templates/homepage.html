@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SECURE | Lockey Inspired Protection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lockey-blue: #0A2357; /* Deep Trust Blue */
+            --lockey-yellow: #FFB800; /* Signature Action Yellow */
+            --lockey-text: #1A1A1A;
+            --lockey-light: #F4F7FA;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--white); color: var(--lockey-text); line-height: 1.6; }
+
+        /* Navigation */
+        nav {
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--lockey-blue); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--lockey-yellow); }
+
+        nav ul { display: flex; list-style: none; gap: 35px; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--lockey-blue); font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        nav ul li a:hover { color: var(--lockey-yellow); }
+
+        .btn-nav {
+            background: var(--lockey-blue);
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 5px;
+        }
+
+        /* Hero Section - Lockey Style */
+        .hero {
+            position: relative;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            background: linear-gradient(rgba(10, 35, 87, 0.8), rgba(10, 35, 87, 0.6)), 
+                        url('https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1600'); /* Smart Home Security Bg */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-bottom-right-radius: 100px;
+        }
+
+        .hero-content { max-width: 700px; }
+        .hero-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 35px; opacity: 0.9; }
+
+        .btn-yellow {
+            background: var(--lockey-yellow);
+            color: var(--lockey-blue);
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 184, 0, 0.3);
+        }
+        .btn-yellow:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 184, 0, 0.4); }
+
+        /* Feature Section - Face Recognition */
+        .section-padding { padding: 100px 8%; }
+        .flex-container { display: flex; align-items: center; gap: 80px; }
+        .feature-image { flex: 1; position: relative; }
+        .feature-image img { width: 100%; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
+        
+        /* Face ID Tech Image */
+        .face-scan-overlay {
+            position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80%; height: 80%;
+            border: 2px solid var(--lockey-yellow);
+            border-radius: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+
+        .feature-text { flex: 1; }
+        .tag { color: var(--lockey-yellow); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; display: block; margin-bottom: 15px; }
+        .feature-text h2 { font-size: 2.8rem; color: var(--lockey-blue); margin-bottom: 20px; line-height: 1.2; }
+
+        /* Security Operations - Dark Layout */
+        .dark-section { background: var(--lockey-blue); color: white; border-top-left-radius: 100px; }
+        .dark-section h2 { color: white; }
+
+        /* Grid Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+        .card { 
+            background: white; padding: 40px; border-radius: 15px; transition: 0.4s; 
+            border: 1px solid #eee;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--lockey-yellow); }
+        .card i { font-size: 2.5rem; color: var(--lockey-yellow); margin-bottom: 25px; }
+        .card h3 { color: var(--lockey-blue); margin-bottom: 15px; font-size: 1.4rem; }
+        .card p { color: #666; font-size: 0.95rem; }
+
+        footer { background: #051435; color: #aeb9ce; padding: 80px 8% 30px; text-align: center; }
+        .footer-logo { font-size: 2rem; color: white; font-weight: 800; margin-bottom: 20px; display: block; text-decoration: none; }
+        .footer-line { margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">LOCKEY <span>AI</span></a>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#tech">AI Technology</a></li>
+            <li><a href="#ops">Operations</a></li>
+            <li><a href="#" class="btn-nav">Secure Login</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <span class="tag" style="color: white;">Smart Flat Protection</span>
+            <h1>The Future of <br>Apartment Security</h1>
+            <p>Experience the next generation of security with AI-driven facial recognition and real-time monitoring. Built for modern residential living.</p>
+            <a href="#tech" class="btn-yellow">Initialize System</a>
+        </div>
+    </header>
+
+    <section class="section-padding" id="tech">
+        <div class="flex-container">
+            <div class="feature-image">
+                <div class="face-scan-overlay"></div>
+                <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&q=80&w=800" alt="Facial Recognition Functionality">
+            </div>
+            <div class="feature-text">
+                <span class="tag">Biometric Defense</span>
+                <h2>AI-Powered Face <br>Identification</h2>
+                <p>Our core module uses advanced Python algorithms to scan and identify individuals in 0.2 seconds. By cross-referencing our secure MySQL database, we ensure only residents and registered guests gain entry.</p>
+                <div style="margin-top: 30px;">
+                    <p><strong><i class="fas fa-check-circle" style="color:var(--lockey-yellow);"></i> 99.9% Recognition Rate</strong></p>
+                    <p><strong><i class="fas fa-check-circle" style="color:var(--lockey-yellow);"></i> Instant Intruder Alerts</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding dark-section" id="ops">
+        <div class="flex-container" style="flex-direction: row-reverse;">
+            <div class="feature-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bbbda5366392?auto=format&fit=crop&q=80&w=800" alt="Security Operations Dashboard">
+            </div>
+            <div class="feature-text">
+                <span class="tag" style="color: var(--lockey-yellow);">Management Hub</span>
+                <h2>Centralized Security <br>Command Center</h2>
+                <p>Security personnel can manage the entire complex from a single Django-powered dashboard. Track visitor logs via QR codes, monitor camera feeds, and respond to resident SOS signals instantly.</p>
+                <a href="#" class="btn-yellow" style="margin-top: 20px;">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background: var(--lockey-light);">
+        <div style="text-align: center;">
+            <span class="tag">What we offer</span>
+            <h2 style="font-size: 2.5rem; color: var(--lockey-blue);">Comprehensive Safety Modules</h2>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-qrcode"></i>
+                <h3>QR Visitor Entry</h3>
+                <p>Generate secure, time-sensitive QR codes for guests and delivery personnel.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-car"></i>
+                <h3>Auto-Parking</h3>
+                <p>AI-driven slot allocation for residents and authorized visitors.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-bell"></i>
+                <h3>Emergency SOS</h3>
+                <p>Instant mobile-to-guard alert system for medical or safety emergencies.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="#" class="footer-logo">LOCKEY <span>AI</span></a>
+        <p>MES College of Engineering, Kuttippuram<br>Department of Computer Applications</p>
+        <div class="footer-line">
+            &copy; 2026 AI SECURE | Developed by RIZVANA KA | Reg No: MES24MCA-2045
+        </div>
+    </footer>
+
+</body>
+</html>

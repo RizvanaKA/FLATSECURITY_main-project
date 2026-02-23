@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Security Staff | Full Access</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --danger: #ef4444;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; 
+        }
+
+        .dashboard-container {
+            width: 98%;
+            max-width: 1300px;
+            height: 85vh;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 { font-size: 1.25rem; color: var(--text-dark); }
+
+        /* Table Area */
+        .table-section {
+            flex: 1;
+            padding: 10px 20px;
+            overflow-y: auto; /* Internal scroll only if many rows */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #f8fafc;
+            text-align: left;
+            padding: 15px 10px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            color: var(--text-dark);
+        }
+
+        /* Photo Column Style */
+        .photo-cell {
+            position: relative;
+            width: 80px;
+        }
+
+        .staff-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .staff-thumb:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        .upload-hint {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--primary);
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        /* Gender Column Style */
+        .gender-cell {
+            width: 220px;
+        }
+
+        .gender-btn-group {
+            display: flex;
+            gap: 4px;
+        }
+
+        .gender-btn {
+            padding: 5px 10px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .gender-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Action Column Style */
+        .action-links a {
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+
+        .edit-link { color: var(--primary); }
+        .delete-link { color: var(--danger); }
+        .action-links a:hover { text-decoration: underline; }
+
+        .footer {
+            padding: 15px 30px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="header">
+        <h1>🛡️ Security Staff Management</h1>
+        <div style="font-size: 0.85rem; color: var(--text-light);">
+            Status: <b>Live Database</b>
+        </div>
+    </div>
+
+    <div class="table-section">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 50px;">S.No</th>
+                    <th>Photo (Click to Browse)</th>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01</td>
+                    <td class="photo-cell">
+                        <input type="file" id="file01" hidden accept="image/*" onchange="updateRowImage(this, 'img01')">
+                        <img src="https://via.placeholder.com/50" class="staff-thumb" id="img01" alt="Staff" onclick="document.getElementById('file01').click()">
+                        <span class="upload-hint" onclick="document.getElementById('file01').click()">Update File</span>
+                    </td>
+                    <td><b>Robert Wilson</b></td>
+                    <td>r.wilson@secure.com</td>
+                    <td>+1 555-0102</td>
+                    <td class="gender-cell">
+                        <div class="gender-btn-group">
+                            <button class="gender-btn active" onclick="toggleBtn(this)">Male</button>
+                            <button class="gender-btn" onclick="toggleBtn(this)">Female</button>
+                            <button class="gender-btn" onclick="toggleBtn(this)">Other</button>
+                        </div>
+                    </td>
+                    <td class="action-links">
+                        <a href="#" class="edit-link">Edit</a>
+                        <a href="#" class="delete-link">Delete</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>02</td>
+                    <td class="photo-cell">
+                        <input type="file" id="file02" hidden accept="image/*" onchange="updateRowImage(this, 'img02')">
+                        <img src="https://via.placeholder.com/50" class="staff-thumb" id="img02" alt="Staff" onclick="document.getElementById('file02').click()">
+                        <span class="upload-hint" onclick="document.getElementById('file02').click()">Update File</span>
+                    </td>
+                    <td><b>Sarah Jenkins</b></td>
+                    <td>s.jenkins@secure.com</td>
+                    <td>+1 555-0199</td>
+                    <td class="gender-cell">
+                        <div class="gender-btn-group">
+                            <button class="gender-btn" onclick="toggleBtn(this)">Male</button>
+                            <button class="gender-btn active" onclick="toggleBtn(this)">Female</button>
+                            <button class="gender-btn" onclick="toggleBtn(this)">Other</button>
+                        </div>
+                    </td>
+                    <td class="action-links">
+                        <a href="#" class="edit-link">Edit</a>
+                        <a href="#" class="delete-link">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        Showing 2 staff members. All changes are autosaved to laptop session.
+    </div>
+</div>
+
+<script>
+    // Handle Gender Toggle within Row
+    function toggleBtn(element) {
+        const group = element.parentElement;
+        group.querySelectorAll('.gender-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+    }
+
+    // Handle Laptop File Browser and Preview for specific row
+    function updateRowImage(input, imgId) {
+        const preview = document.getElementById(imgId);
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+</body>
+</html>
