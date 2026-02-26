@@ -79,3 +79,45 @@ The main objective of this project is to:
 4. AI Integration: Face Recognition Model
 
 5. QR Code Generation: QR Code library
+
+   **System Workflow**
+
+1. Camera captures face image.
+
+2. AI model compares the image with stored resident data.
+
+3. If person is authorized → Entry allowed.
+
+4. If person is unknown → Alert sent to flat owner and security.
+
+5. Visitor details are stored in the database.
+
+6. Residents can generate QR codes for guests via web system.
+
+7. All records are maintained digitally for future reference.
+
+   **Project Modules**
+
+1. Admin Module
+
+2. User Module
+
+3. Security Module
+
+4. CCTV Module
+
+  **Advantages of the System**
+
+1. Reduces manual monitoring effort
+
+2. Faster emergency response
+
+3. Secure visitor tracking
+
+4. Organized digital records
+
+5. Smart AI-based identification
+
+   **Conclusion**
+
+The AI-Based Flat Security System Web Application provides a smart, secure, and efficient platform for managing apartment security. By combining AI face recognition with digital visitor management and QR-based access, the system enhances safety and reduces manual effort.
