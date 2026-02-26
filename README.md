@@ -12,15 +12,15 @@ This project focuses on developing the web platform of the system to digitally m
 
 The main objective of this project is to:
 
-1.Improve apartment security using AI technology
+1. Improve apartment security using AI technology
 
-2.Reduce manual effort in visitor management
+2. Reduce manual effort in visitor management
 
-3.Provide faster alert and response mechanisms
+3. Provide faster alert and response mechanisms
 
-4.Maintain digital records of residents and visitors
+4. Maintain digital records of residents and visitors
 
-5.Create a centralized web platform for security management
+5. Create a centralized web platform for security management
 
 **Features Implemented (Web Side)**
 
@@ -80,7 +80,7 @@ The main objective of this project is to:
 
 5. QR Code Generation: QR Code library
 
-   ***System Workflow***
+   **System Workflow**
 
 1. Camera captures face image.
 
@@ -94,7 +94,7 @@ The main objective of this project is to:
 
 6. Residents can generate QR codes for guests via web system.
 
-7. All records are maintained digitally for future reference.
+7. All records are maintained digitally for future reference
 
    ****Project Modules****
 
