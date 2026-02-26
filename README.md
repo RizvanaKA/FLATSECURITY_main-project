@@ -80,7 +80,7 @@ The main objective of this project is to:
 
 5. QR Code Generation: QR Code library
 
-   **System Workflow**
+    **System Workflow**
 
 1. Camera captures face image.
 
@@ -96,7 +96,7 @@ The main objective of this project is to:
 
 7. All records are maintained digitally for future reference
 
-   ****Project Modules****
+    **Project Modules**
 
 1. Admin Module
 
