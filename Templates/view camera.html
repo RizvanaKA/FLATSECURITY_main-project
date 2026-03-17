@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cameras | System Admin</title>
+    <style>
+        :root {
+            --primary: #0A2357; /* Consistent Navy Brand Color */
+            --primary-hover: #162e64;
+            --danger: #ef4444;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            height: 85vh;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            padding: 24px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-btn {
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .add-btn:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+
+        .table-area { flex: 1; padding: 10px 25px; overflow-y: auto; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 10;
+            text-align: left;
+            padding: 15px 12px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        td { padding: 16px 12px; border-bottom: 1px solid var(--border); color: var(--text-dark); }
+
+        /* --- Status Badge --- */
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--success);
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .action-links a { text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-right: 15px; }
+        .edit-link { color: var(--primary); }
+        .delete-link { color: var(--danger); }
+
+        .footer { padding: 15px 30px; background: #f8fafc; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text-light); text-align: right; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>📷 Surveillance Cameras</h1>
+            <a href="/myapp/add_camera_POST/" class="add-btn">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Register Camera
+            </a>
+        </div>
+
+        <div class="table-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">S.No</th>
+                        <th>Camera No</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Registered On</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td style="font-weight: 700;">#{{ i.camera_no }}</td>
+                        <td>{{ i.location }}</td>
+                        <td><span class="status-badge">{{ i.status }}</span></td>
+                        <td>{{ i.date }} <br> <small style="color:var(--text-light)">{{ i.time }}</small></td>
+                        <td class="action-links">
+                            <a href="/myapp/delete_camera/{{ i.id }}" class="delete-link" onclick="return confirm('Delete this camera?')">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            System Monitoring: All camera feeds are currently logged.
+        </div>
+    </div>
+
+</body>
+</html>

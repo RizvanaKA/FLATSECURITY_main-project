@@ -172,29 +172,13 @@
             <a href="#" class="back-link">← Back to list</a>
         </div>
 
-        <form action="/update-notification" method="POST">
+        <form action="/myapp/edit_notification_POST/" method="POST">
+            {% csrf_token %}
             <div class="form-area">
-                
-                <div class="form-group">
-                    <label for="serial_no">Serial Number</label>
-                    <input type="text" id="serial_no" name="serial_no" value="01" readonly>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" id="date" name="date" value="2026-01-22" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="time">Time</label>
-                        <input type="time" id="time" name="time" value="09:00" required>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="message">Manage Message</label>
-                    <textarea id="message" name="message" placeholder="Type notification content here..." required>Staff meeting scheduled for tomorrow at 10 AM.</textarea>
+                    <textarea id="message" name="notification"   required>{{ data.message }}</textarea>
                 </div>
             </div>
 

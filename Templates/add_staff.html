@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management | Secure Admin</title>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .main-card {
+            background: var(--card);
+            width: 95%;
+            max-width: 1000px;
+            height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        form {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            overflow: hidden;
+        }
+
+        .details-section {
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-right: 1px solid var(--border);
+        }
+
+        .side-section {
+            padding: 30px;
+            background: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        input {
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .gender-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gender-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .gender-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .photo-box {
+            flex: 1;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            cursor: pointer;
+        }
+
+        #preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            border-radius: 6px;
+        }
+
+        .footer {
+            padding: 20px 40px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <div class="header">
+        <h1>Add New Security Staff</h1>
+        <span>ID: #AUTO-GEN</span>
+    </div>
+
+    <!-- ✅ FIXED: Added id="staffForm" -->
+    <form id="staffForm" action="/myapp/add_staff_POST/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="details-section">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" name="phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-container">
+                    <button type="button" class="gender-btn" onclick="setGender(this,'Male')">Male</button>
+                    <button type="button" class="gender-btn" onclick="setGender(this,'Female')">Female</button>
+                    <button type="button" class="gender-btn" onclick="setGender(this,'Other')">Other</button>
+                </div>
+                <input type="hidden" id="genderInput" name="gender">
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password">
+                </div>
+            </div>
+        </div>
+
+        <div class="side-section">
+            <label>Profile Photo</label>
+            <div class="photo-box" onclick="document.getElementById('fileInput').click()">
+                <div id="uploadPlaceholder">📷 Click to upload</div>
+                <img id="preview">
+            </div>
+            <input type="file" id="fileInput" name="photo" hidden onchange="previewImage(this)">
+        </div>
+
+    </form>
+
+    <!-- ✅ Button now correctly linked -->
+    <div class="footer">
+        <button type="submit" form="staffForm" class="add-btn">
+            Add Security Staff
+        </button>
+    </div>
+</div>
+
+<script>
+function setGender(btn, value) {
+    document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('genderInput').value = value;
+}
+
+function previewImage(input) {
+    const preview = document.getElementById('preview');
+    const placeholder = document.getElementById('uploadPlaceholder');
+
+    const reader = new FileReader();
+    reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Notification | Admin Portal</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Strictly no page scrolling */
+        }
+
+        .notify-container {
+            width: 90%;
+            max-width: 550px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border);
+            background-color: #ffffff;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .header h1 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px; /* Fixed height for no-scroll layout */
+            padding: 15px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--text-main);
+            resize: none; /* Prevents user resizing */
+            outline: none;
+            transition: all 0.2s ease;
+            background-color: #fdfdfd;
+        }
+
+        textarea:focus {
+            border-color: var(--primary);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .footer {
+            padding: 20px 25px;
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .send-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .send-btn:active {
+            transform: translateY(0);
+        }
+
+        .info-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="notify-container">
+        <div class="header">
+            <h1>🔔 Broadcast Notification</h1>
+        </div>
+
+        <form action="/myapp/add_notification_POST/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="notification">Notification Message</label>
+                    <textarea 
+                        id="notification"
+                        name="notification"
+                        placeholder="Enter the alert or announcement for the staff..." 
+                        required></textarea>
+                    <p class="info-text">This message will be visible to all staff members on their primary dashboard instantly.</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <button type="submit" class="send-btn">
+                    Post Notification
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function broadcast(event) {
+            event.preventDefault();
+            const content = document.getElementById('notification').value;
+            
+            if (content.trim() !== "") {
+                alert("📢 Notification broadcasted successfully!");
+                document.getElementById('notification').value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>

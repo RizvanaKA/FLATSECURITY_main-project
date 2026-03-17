@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Registry | Secure Entry</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* No page scroll */
+        }
+
+        .main-container {
+            width: 98%;
+            max-width: 1400px;
+            height: 85vh;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 { font-size: 1.25rem; color: var(--text-dark); }
+
+        /* Table Design */
+        .table-section {
+            flex: 1;
+            padding: 10px 20px;
+            overflow-y: auto; /* Internal scroll only */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            text-align: left;
+            padding: 15px 10px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        /* Inline Photo Style */
+        .photo-box {
+            position: relative;
+            width: 60px;
+        }
+
+        .visitor-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .visitor-img:hover { border-color: var(--primary); transform: scale(1.05); }
+
+        .browse-txt {
+            display: block;
+            font-size: 0.6rem;
+            color: var(--primary);
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        /* Inline Gender Style */
+        .gender-group {
+            display: flex;
+            gap: 4px;
+        }
+
+        .gender-btn {
+            padding: 4px 8px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .gender-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Time Styling */
+        .time-in { color: #166534; font-weight: 600; }
+        .time-out { color: #991b1b; font-weight: 600; }
+
+        .footer {
+            padding: 15px 30px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            background: #fcfcfc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="header">
+        <h1>👤 Visitor List</h1>
+        <div style="font-size: 0.85rem; color: var(--text-light);">Today: <b></b></div>
+    </div>
+
+    <div class="table-section">
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>In Time</th>
+                    <th>Out Time</th>
+                    <th>photo</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in data %}
+
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.date }}</td>
+                    <td> {{ i.name }}</td>
+                    <td> {{ i.phone }}</td>
+                    <td> {{ i.timeIN }}</td>
+                    <td> {{ i.timeOUT }}</td>
+                    <td class="photo-box">
+                        <input type="file" id="file01" hidden accept="image/*" onchange="updateImage(this, 'img01')">
+                        <img src="{{ i.photo.url }}" class="visitor-img" id="img01" onclick="document.getElementById('file01').click()">
+                        <span class="browse-txt" onclick="document.getElementById('file01').click()">Browse...</span>
+                    </td>
+                    <td><b></b></td>
+
+                    <td></td>
+                    <td></td>
+                    <td class="time-in"></td>
+                    <td class="time-out"></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        * Clicking the visitor photo or "Browse" opens your laptop file explorer to update visitor identification.
+    </div>
+</div>
+
+<script>
+    // Handle Gender Button Toggle
+    function setGender(btn) {
+        const group = btn.parentElement;
+        group.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    // Handle Laptop File Browser for specific row
+    function updateImage(input, imgId) {
+        const img = document.getElementById(imgId);
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+</body>
+</html>

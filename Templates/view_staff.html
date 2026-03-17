@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Security Staff | Full Access</title>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --danger: #ef4444;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text-dark: #0f172a;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-container {
+            width: 98%;
+            max-width: 1300px;
+            height: 85vh;
+            background: var(--card);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+        }
+
+        .header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-section {
+            flex: 1;
+            padding: 10px 20px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        thead th {
+            background: #f8fafc;
+            padding: 15px 10px;
+            border-bottom: 2px solid var(--border);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .staff-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        .action-links a {
+            font-weight: 600;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .edit-link { color: var(--primary); }
+        .delete-link { color: var(--danger); }
+
+        .footer {
+            padding: 15px 30px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <div class="header">
+        <h1>🛡️ Security Staff Management</h1>
+        <a href="/myapp/add_staff/" class="edit-link">+ Add New Staff</a>
+    </div>
+
+    <div class="table-section">
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Photo</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for i in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>
+                        {% if i.photo %}
+                            <img src="{{ i.photo.url }}" class="staff-thumb">
+                        {% else %}
+                            <span>No Photo</span>
+                        {% endif %}
+                    </td>
+
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.phone }}</td>
+                    <td>{{ i.gender }}</td>
+
+                    <td class="action-links">
+                        <a href="/myapp/edit_staff/{{ i.id }}" class="edit-link">Edit</a>
+                        <a href="/myapp/delete_staff/{{ i.id }}" class="delete-link">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        Showing all registered security personnel.
+    </div>
+
+</div>
+
+</body>
+</html>
