@@ -889,6 +889,18 @@ def delete_dangerous_person(request):
 
 
 
+def delete_camera_noti(request):
+    id=request.POST['id']
+    unknown_person_table.objects.get(id=id).delete()
+    return JsonResponse({'status':'ok'})
+
+def delete_rag_noti(request):
+    id=request.POST['id']
+    RaggingEvidence.objects.get(id=id).delete()
+    return JsonResponse({'status':'ok'})
+
+
+
 
 
 def security_view_violence_detection(request):
@@ -1421,3 +1433,4 @@ def get_notifications_emergency(request):
         })
 
     return JsonResponse({"status": "na"})
+

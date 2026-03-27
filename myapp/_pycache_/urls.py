@@ -96,6 +96,8 @@ urlpatterns = [
     path('get_notifications_dangerous',       views.get_notifications_dangerous,       name='get_notifications_dangerous'),
     path('get_notifications_violence',       views.get_notifications_violence,       name='get_notifications_violence'),
     path('get_notifications_emergency',       views.get_notifications_emergency,       name='get_notifications_emergency'),
+    path('delete_camera_noti',views.delete_camera_noti,name='delete_camera_noti'),
+    path('delete_rag_noti',views.delete_rag_noti,name='delete_rag_noti'),
 
 
 ]
