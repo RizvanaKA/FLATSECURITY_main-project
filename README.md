@@ -104,7 +104,6 @@ The main objective of this project is to:
 
 3. Security Module
 
-4. CCTV Module
 
   **Advantages of the System**
 
